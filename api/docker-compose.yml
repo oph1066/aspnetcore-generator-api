@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  generator:
+    build:
+      context: .
+      dockerfile: Dockerfile-multi
+    image: elfrid/aspnetcore-generator:multi
+    #image: dockerfile-multi
+    ports: ["8123:80"]
+  mail:
+    image: mailhog/mailhog
+    ports: ["8025:8025","1025:1025"]
+    
