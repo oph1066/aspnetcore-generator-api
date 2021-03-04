@@ -15,7 +15,7 @@ namespace api.Controllers
     [Route("[action]")]
     public class GenerateController : Controller
     {
-        [HttpGet]
+        [HttpPost]
         public async Task EmailRandomNames(Range range, string email = "test@facke.com")
         {
             var message = new MailMessage();
