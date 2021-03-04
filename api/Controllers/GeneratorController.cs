@@ -6,12 +6,36 @@ using Microsoft.AspNetCore.Mvc;
 using Faker;
 using Faker.Extensions;
 
+using System.Net.Mail;
+using MimeKit;
+
 namespace api.Controllers
 {
     // Just use action name as route
     [Route("[action]")]
     public class GenerateController : Controller
     {
+        [HttpGet]
+        public async Task EmailRandomNames(Range range, string email = "test@facke.com")
+        {
+            var message = new MailMessage();
+            message.From = (new MailAddress("","generator@generate.com"));
+            message.To.Add(new MailAddress("", email));
+
+            message.Subject = "Here are your random names";
+
+            message.Body = new TextPart("plain")
+            {
+                Text = string.Join(Environment.NewLine, range.Of(Name.FullName))
+            }.ToString();
+
+            using (var mailClient = new SmtpClient())
+            {
+                await mailClient.SendMailAsync(message);
+            }
+
+        }
+
         [HttpGet]
         public IEnumerable<string> Names(Range range)
             => range.Of(Name.FullName);
