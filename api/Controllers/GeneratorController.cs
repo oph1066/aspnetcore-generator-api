@@ -18,10 +18,9 @@ namespace api.Controllers
         [HttpPost]
         public async Task EmailRandomNames(Range range, string email = "test@facke.com")
         {
-            var message = new MailMessage();
-            message.From = (new MailAddress("","generator@generate.com"));
-            message.To.Add(new MailAddress("", email));
-
+            var message = new MailMessage("generator@generate.com",email);
+            //message.From = (new MailAddress("","generator@generate.com"));
+            //message.To.Add(new MailAddress(email));
             message.Subject = "Here are your random names";
 
             message.Body = new TextPart("plain")
@@ -31,7 +30,13 @@ namespace api.Controllers
 
             using (var mailClient = new SmtpClient())
             {
+                mailClient.Host = "docker";
+                mailClient.Port = 1025;
+                mailClient.EnableSsl = false;
+                //mailClient.Send(message);
+
                 await mailClient.SendMailAsync(message);
+
             }
 
         }
