@@ -30,7 +30,7 @@ namespace api.Controllers
 
             using (var mailClient = new SmtpClient())
             {
-                mailClient.Host = "docker";
+                mailClient.Host = "docker.carr4.local";
                 mailClient.Port = 1025;
                 mailClient.EnableSsl = false;
                 //mailClient.Send(message);
