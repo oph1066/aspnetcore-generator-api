@@ -1,12 +1,12 @@
 # Build Stage
 FROM microsoft/aspnetcore-build:2 as build-env
-WORKDIR /api
 
-COPY *.csproj .
-RUN dotnet restore
-
+WORKDIR /API
 COPY . .
+RUN dotnet restore
 RUN dotnet publish -o /publish
+
+WORKDIR /publish
 
 # Runtime Stage
 FROM microsoft/aspnetcore:2 as run-env
