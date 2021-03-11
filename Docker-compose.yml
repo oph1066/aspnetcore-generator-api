@@ -4,7 +4,7 @@ services:
   generator:
     build:
       context: .
-      dockerfile: Dockerfile-multi
-    image: elfrid/aspnetcore-generator:multi
+      dockerfile: Dockerfile
+    image: testing
     #image: dockerfile-multi
     ports: ["8123:80"]
