@@ -15,7 +15,7 @@ RUN dotnet test tests/tests.csproj
 RUN dotnet publish api/api.csproj -o /publish
 
 
-FROM mcr.microsoft.com/dotnet/core/aspnet AS run-env
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.1 AS run-env
 COPY  --from=build-env /publish /publish
 
 WORKDIR /publish/

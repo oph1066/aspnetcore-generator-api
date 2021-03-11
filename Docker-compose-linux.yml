@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: registry:55000/aspnetcore-gen-test:linux
+    #image: dockerfile-multi
+    ports: ["8123:80"]
